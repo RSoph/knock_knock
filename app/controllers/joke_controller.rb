@@ -1,12 +1,23 @@
 class JokeController < ApplicationController
-
 	def index
 
 		@setup = [ "A broken pencil",
-					"Cows go"
+					"Cows go",
+					"Canoe",
+					"Justin",
+					"Abby",
+					"Tank",
+					"Watson",
+					"Spell"
 				 ]
-		@punchline = 	[ "Nevermind, it's pointless",
-						  "No silly, cows go 'moo'!"
+		@punchline = [ "Nevermind, it's pointless.",
+					   "No silly, cows go 'moo'!",
+					   "Canoe help me with my homework?",
+					   "Justin time for dinner.",
+					   "Abby birthday to you!",
+					   "You're welcome!",
+					   "What's on tv tonight?",
+					   "W-H-O"
 						]
 
 		message_body = params["Body"]
@@ -28,14 +39,12 @@ class JokeController < ApplicationController
 
 		if body == 'Joke'
 			message(from_number, "Knock knock!")
-	  	elsif body == "Who's there?" || body == "Whos there?" || body == "Whos there"
+		elsif body == "Who's there?" || body == "Whos there?"
 			index = rand(@setup.length)
 			message(from_number, @setup[index])
 		elsif @setup.include?(body)
 			index = @setup.index(body)
 			message(from_number, @punchline[index])
-		elsif body == "Just testing"
-			message(from_number, "test passed")
 		end
 		render nothing: true
 	end
