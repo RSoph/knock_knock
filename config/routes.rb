@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'home#index'
+  root 'joke#index'
 
   get '/jokes' => 'joke#index'
 
