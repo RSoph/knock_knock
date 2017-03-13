@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'joke#index'
 
   get '/jokes' => 'joke#index'
+  post '/jokes' => 'joke#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
