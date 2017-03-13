@@ -30,6 +30,8 @@ class JokeController < ApplicationController
 			message(from_number, @setup[0])
 		elsif body == @setup[0] + " who?"
 			message(from_number, @punchline[0])
+		elsif body == "just testing"
+			message(from_number, "test passed")
 		end
 		# render nothing: true
 		render text: body
