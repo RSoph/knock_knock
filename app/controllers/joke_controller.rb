@@ -28,13 +28,13 @@ class JokeController < ApplicationController
 			message(from_number, "Knock knock!")
 	  	elsif body == "who's there?" || body == "whos there?" || body == "whos there"
 			message(from_number, @setup[0])
-		elsif body == @setup[0] + " who?"
+		elsif body == @setup[0].downcase + " who?"
 			message(from_number, @punchline[0])
 		elsif body == "just testing"
 			message(from_number, "test passed")
 		end
-		# render nothing: true
-		render text: body
+		render nothing: true
+		# render text: body
 	end
 
 	private
