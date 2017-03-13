@@ -13,7 +13,7 @@ class JokeController < ApplicationController
 		message_body ||= "just testing"
 		from_number = params["From"]
 		from_number ||= '7187535492'
-		body = message_body.downcase.strip
+		body = message_body.downcase.strip.capitalize
 		if body[-5..-1] == " who?"
 			body = body[0..-6]
 		end
@@ -26,15 +26,15 @@ class JokeController < ApplicationController
 			)
 		end
 
-		if body == 'joke'
+		if body == 'Joke'
 			message(from_number, "Knock knock!")
-	  	elsif body == "who's there?" || body == "whos there?" || body == "whos there"
+	  	elsif body == "Who's there?" || body == "Whos there?" || body == "Whos there"
 			index = rand(@setup.length)
 			message(from_number, @setup[index])
 		elsif @setup.include?(body)
 			index = @setup.index(body)
 			message(from_number, @punchline[index])
-		elsif body == "just testing"
+		elsif body == "Just testing"
 			message(from_number, "test passed")
 		end
 		render nothing: true
