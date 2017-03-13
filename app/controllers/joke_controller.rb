@@ -11,10 +11,12 @@ class JokeController < ApplicationController
 
 		message_body = params["Body"]
 		message_body ||= "just testing"
-		body = message_body.downcase.strip
 		from_number = params["From"]
 		from_number ||= '7187535492'
-
+		body = message_body.downcase.strip
+		if body[-5..-1] == " who?"
+			body = body[0..-6]
+		end
 		def message(to_number, text_body)
 			client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
 			message = client.messages.create(
@@ -27,14 +29,15 @@ class JokeController < ApplicationController
 		if body == 'joke'
 			message(from_number, "Knock knock!")
 	  	elsif body == "who's there?" || body == "whos there?" || body == "whos there"
-			message(from_number, @setup[0])
-		elsif body == @setup[0].downcase + " who?"
-			message(from_number, @punchline[0])
+			index = rand(@setup.length)
+			message(from_number, @setup[index])
+		elsif @setup.include?(body)
+			index = @setup.index(body)
+			message(from_number, @punchline[index])
 		elsif body == "just testing"
 			message(from_number, "test passed")
 		end
 		render nothing: true
-		# render text: body
 	end
 
 	private
