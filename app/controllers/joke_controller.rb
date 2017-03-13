@@ -18,7 +18,7 @@ class JokeController < ApplicationController
 		def message(to_number, text_body)
 			client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
 			message = client.messages.create(
-			from: "+15675234372",
+			from: "+17185698673",
 			to: to_number,
 			body: text_body
 			)
@@ -31,13 +31,13 @@ class JokeController < ApplicationController
 		elsif body == @setup[0] + " who?"
 			message(from_number, @punchline[0])
 		end
-		render nothing: true
-		# render text: body
+		# render nothing: true
+		render text: body
 	end
 
 	private
 
-	def text_params
+	def joke_params
       params.permit(:message_body, :from_number)
     end
 end
