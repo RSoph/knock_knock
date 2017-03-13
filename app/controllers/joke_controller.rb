@@ -21,9 +21,7 @@ class JokeController < ApplicationController
 						]
 
 		message_body = params["Body"]
-		message_body ||= "just testing"
 		from_number = params["From"]
-		from_number ||= '7187535492'
 		body = message_body.downcase.strip.capitalize
 		if body[-5..-1] == " who?"
 			body = body[0..-6]
