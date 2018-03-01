@@ -22,6 +22,8 @@ class JokeController < ApplicationController
 
 		message_body = params["Body"]
 		from_number = params["From"]
+		message_body ||= "joke"
+		from_number ||= "+17187535492"
 		body = message_body.downcase.strip.capitalize
 		if body[-5..-1] == " who?"
 			body = body[0..-6]
@@ -29,7 +31,7 @@ class JokeController < ApplicationController
 		def message(to_number, text_body)
 			client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
 			message = client.messages.create(
-			from: "+17185698673",
+			from: "+16614030785",
 			to: to_number,
 			body: text_body
 			)
